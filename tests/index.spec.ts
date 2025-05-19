@@ -1,37 +1,40 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'fs';
+import path from 'path';
 
-import { expect } from '@jest/globals'
-import { defaults } from 'jest-config'
+import { expect } from '@jest/globals';
+import { defaults } from 'jest-config';
 
-import { display } from '../examples/names-ts/index'
+import { display } from '../examples/names-ts/index';
 
 /// using @babel/preset-typescript
 /// i was able to us directly the typescript code without bundle the code
-import transformer, { Options } from '../src/index'
+import transformer, { Options } from '../src/index';
 
 const process = (sourcePath: string, options?: Options) => {
-  const content = fs.readFileSync(sourcePath, 'utf-8')
+  const content = fs.readFileSync(sourcePath, 'utf-8');
 
-  const Transformer = transformer.createTransformer({ 
-    format: 'esm', 
+  const Transformer = transformer.createTransformer({
+    format: 'esm',
     sourcemap: true,
-    ...(options || {})
-  })
+    ...(options || {}),
+  });
 
-  const config = { ...defaults, cwd: path.resolve() } as any
-  const output = Transformer.process(content, sourcePath, config) as { code: string, map: string }
+  const config = { ...defaults, cwd: path.resolve() } as any;
+  const output = Transformer.process(content, sourcePath, config) as {
+    code: string;
+    map: string;
+  };
 
-  return { ...output }
-}
+  return { ...output };
+};
 
 test('ts file', () => {
-  const names = display()
-  expect(names.includes('Jane')).toBeTruthy()
-})
+  const names = display();
+  expect(names.includes('Jane')).toBeTruthy();
+});
 
 test('should have sourcemap with [jest.mock]', () => {
-  const output = process('./examples/names-ts/index.spec.ts')
+  const output = process('./examples/names-ts/index.spec.ts');
 
   expect(output.code).toMatchInlineSnapshot(`
     "\\"use strict\\";
@@ -56,20 +59,21 @@ test('should have sourcemap with [jest.mock]', () => {
     });
     
     //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LnNwZWMudHMiXSwibWFwcGluZ3MiOiI7QUFJQSxjQUFLLEtBQUssV0FBVztBQUNuQixTQUFPO0lBQ0w7QUFDRSxhQUFPLENBQUU7Ozs7QUFQZixJQUFBLFdBQUEsUUFBQTtBQUVBLElBQUEsU0FBQSxRQUFBOzs7Ozs7OztBQVVBLEtBQUssaUNBQWlDO0FBQ3BDLEVBQUEsSUFBQSxTQUFBLFFBQU8sSUFBQSxPQUFBLFlBQVcsUUFBUSxDQUFFOzsiLCJuYW1lcyI6W10sInNvdXJjZXNDb250ZW50IjpudWxsfQ=="
-  `)
-  
-   expect(output.map).toEqual(      {
+  `);
+
+  expect(output.map).toEqual({
     version: 3,
-    sources: [ 'index.spec.ts' ],
-    mappings: ';AAIA,cAAK,KAAK,WAAW;AACnB,SAAO;IACL;AACE,aAAO,CAAE;;;;AAPf,IAAA,WAAA,QAAA;AAEA,IAAA,SAAA,QAAA;;;;;;;;AAUA,KAAK,iCAAiC;AACpC,EAAA,IAAA,SAAA,QAAO,IAAA,OAAA,YAAW,QAAQ,CAAE;;',
+    sources: ['index.spec.ts'],
+    mappings:
+      ';AAIA,cAAK,KAAK,WAAW;AACnB,SAAO;IACL;AACE,aAAO,CAAE;;;;AAPf,IAAA,WAAA,QAAA;AAEA,IAAA,SAAA,QAAA;;;;;;;;AAUA,KAAK,iCAAiC;AACpC,EAAA,IAAA,SAAA,QAAO,IAAA,OAAA,YAAW,QAAQ,CAAE;;',
     names: [],
-    sourcesContent: null
-  })
-})
+    sourcesContent: null,
+  });
+});
 
 test('should have sourcemap without [jest.mock]', () => {
-  const output = process('./examples/names-ts/index.ts')
-  
+  const output = process('./examples/names-ts/index.ts');
+
   expect(output.code).toMatchInlineSnapshot(`
     "import names from \\"./names\\";
     function display() {
@@ -80,18 +84,18 @@ test('should have sourcemap without [jest.mock]', () => {
     };
 
     //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4vZXhhbXBsZXMvbmFtZXMtdHMvaW5kZXgudHMiXSwibWFwcGluZ3MiOiJBQUFBO0FBRU87QUFDTCxTQUFPO0FBQUE7IiwibmFtZXMiOltdLCJzb3VyY2VzQ29udGVudCI6bnVsbH0="
-  `)
+  `);
 
   expect(output.map).toEqual({
     version: 3,
-    sources: [ './examples/names-ts/index.ts' ],
+    sources: ['./examples/names-ts/index.ts'],
     mappings: 'AAAA;AAEO;AACL,SAAO;AAAA;',
     names: [],
-    sourcesContent: null
-  })
-})
+    sourcesContent: null,
+  });
+});
 
 test('should not have sourcemap [default]', () => {
-  const output = process('./examples/names-ts/index.ts', { sourcemap: false })
-  expect(output.map).toBeNull()
-})
+  const output = process('./examples/names-ts/index.ts', { sourcemap: false });
+  expect(output.map).toBeNull();
+});

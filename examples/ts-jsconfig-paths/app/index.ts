@@ -1,5 +1,5 @@
-import { add } from 'calculator'
+import { add } from 'calculator';
 
 export default function displaySum() {
-  return add(10, 20)
+  return add(10, 20);
 }

@@ -7,8 +7,8 @@ This is a fork of esbuild-jest to fix these issues:
 Source code could not contain text `ock(`
 https://github.com/aelbore/esbuild-jest/issues/57
 
-
 ### A Jest transformer using esbuild
+
 With this transformer you can use and transform (ts, js, tsx and jsx) files
 
 [![npm](https://img.shields.io/npm/v/esbuild-jest.svg)](https://www.npmjs.com/package/esbuild-jest)
@@ -33,34 +33,34 @@ esbuild-jest transformer should be used in your Jest config file like this:
 ```
 
 #### Setting up Jest config file with transformOptions
+
 ```typescript
 export interface Options {
-  jsxFactory?: string
-  jsxFragment?: string
-  sourcemap?: boolean | 'inline' | 'external'
+  jsxFactory?: string;
+  jsxFragment?: string;
+  sourcemap?: boolean | 'inline' | 'external';
   loaders?: {
-    [ext: string]: Loader
-  },
-  target?: string
-  format?: string
+    [ext: string]: Loader;
+  };
+  target?: string;
+  format?: string;
 }
 ```
 
 ```js
 {
   "transform": {
-    "^.+\\.tsx?$": [ 
-      "esbuild-jest", 
-      { 
+    "^.+\\.tsx?$": [
+      "esbuild-jest",
+      {
         sourcemap: true,
         loaders: {
           '.spec.ts': 'tsx'
         }
-      } 
+      }
     ]
   }
 }
 ```
 
 > Note: if you are using tsconfig.json and jsconfig.json with "paths", Please look `alias-hq` and there documentation https://github.com/davestewart/alias-hq/blob/master/docs/integrations.md
-

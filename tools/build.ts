@@ -1,16 +1,16 @@
-import { TSRollupConfig, clean, bundle } from 'aria-build'
-import { builtinModules } from 'module'
+import { TSRollupConfig, clean, bundle } from 'aria-build';
+import { builtinModules } from 'module';
 
-import plugins from '../aria.config'
+import plugins from '../aria.config';
 
-(async function() {
-  const pkg = require('../package.json')
+(async function () {
+  const pkg = require('../package.json');
 
   const external = [
     ...builtinModules,
     ...Object.keys(pkg.dependencies),
-    ...Object.keys(pkg.devDependencies)
-  ]
+    ...Object.keys(pkg.devDependencies),
+  ];
 
   const config: TSRollupConfig[] = [
     {
@@ -21,19 +21,19 @@ import plugins from '../aria.config'
         {
           file: './dist/esbuild-jest.js',
           format: 'cjs',
-          exports: 'auto'
+          exports: 'auto',
         },
         {
           file: './dist/esbuild-jest.es.js',
           format: 'es',
-          exports: 'auto'
-        }
+          exports: 'auto',
+        },
       ],
       tsconfig: {
         compilerOptions: {
-          declaration: true
-        }
-      }
+          declaration: true,
+        },
+      },
     },
     {
       input: './src/transformer.ts',
@@ -42,12 +42,12 @@ import plugins from '../aria.config'
         {
           file: './dist/transformer.js',
           format: 'cjs',
-          exports: 'auto'
-        }
-      ]
-    }
-  ]
+          exports: 'auto',
+        },
+      ],
+    },
+  ];
 
-  await clean('dist')
-  await bundle({ config, swc: true, write: true })
-})()
+  await clean('dist');
+  await bundle({ config, swc: true, write: true });
+})();

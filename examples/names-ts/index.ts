@@ -1,5 +1,5 @@
-import names from './names'
+import names from './names';
 
 export function display() {
-  return names
+  return names;
 }

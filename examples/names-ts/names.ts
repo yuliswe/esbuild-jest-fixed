@@ -1,5 +1,3 @@
-const names = [
-  "John", "Jane"
-]
+const names = ['John', 'Jane'];
 
-export default names
+export default names;

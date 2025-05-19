@@ -7,17 +7,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "importHelpers": true,
-    "esModuleInterop": true, 
+    "esModuleInterop": true,
     "jsx": "react",
-    "lib" :[
-      "dom",
-      "es2015",
-      "es2017",
-      "es2018",
-      "es2019"
-    ],
+    "lib": ["dom", "es2015", "es2017", "es2018", "es2019"],
     "paths": {
-      "calculator": [ "./examples/ts-jsconfig-paths/libs/calculator.ts" ]
-    }
-  }
+      "calculator": ["./examples/ts-jsconfig-paths/libs/calculator.ts"],
+    },
+  },
 }

@@ -1,6 +1,6 @@
-import path from 'path' 
+import path from 'path';
 
-export const loaders = ["js", "jsx", "ts", "tsx", "json"]
+export const loaders = ['js', 'jsx', 'ts', 'tsx', 'json'];
 
 export const getExt = (str: string) => {
   const basename = path.basename(str);
@@ -8,7 +8,7 @@ export const getExt = (str: string) => {
   const lastDot = basename.lastIndexOf('.');
   const extname = path.extname(basename).replace(/(\.[a-z0-9]+).*/i, '$1');
 
-  if (firstDot === lastDot) return extname
+  if (firstDot === lastDot) return extname;
 
-  return basename.slice(firstDot, lastDot) + extname
-}
+  return basename.slice(firstDot, lastDot) + extname;
+};
