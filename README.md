@@ -1,5 +1,13 @@
 # esbuild-jest
 
+### This is a fork of esbuild-jest
+
+This is a fork of esbuild-jest to fix these issues:
+
+Source code could not contain text `ock(`
+https://github.com/aelbore/esbuild-jest/issues/57
+
+
 ### A Jest transformer using esbuild
 With this transformer you can use and transform (ts, js, tsx and jsx) files
 

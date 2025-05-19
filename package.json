@@ -1,7 +1,7 @@
 {
-  "name": "esbuild-jest",
+  "name": "esbuild-jest-fixed",
   "version": "0.5.0",
-  "description": "Jest plugin to use esbuild for transformation",
+  "description": "Jest plugin to use esbuild for transformation (Forked from aelbore/esbuild-jest to fix issues)",
   "main": "esbuild-jest.js",
   "module": "esbuild-jest.es.js",
   "typings": "esbuild-jest.d.ts",
@@ -19,7 +19,7 @@
     "jest",
     "test"
   ],
-  "author": "Arjay Elbore <aelbore.sg@gmail.com>",
+  "author": "Yu Li <contact@yuli.se>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/aelbore/esbuild-jest/issues"
